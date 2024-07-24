@@ -2,12 +2,12 @@ const imageContainer = document.querySelector("#image-container");
 const loader = document.querySelector("#loader");
 
 // Unsplash API
-const count = 5;
+const totalImagesToLoad = 3;
 const myKeyWords = "human faces";
 const accessKey = "qPCV1kb2qZjLZPyqQtHpL7O_AkdYE8ev-_RjLB6WixQ";
 
 // Variables
-let apiURL = `https://api.unsplash.com/photos/random/?client_id=${accessKey}&count=${count}&query=${myKeyWords}`;
+let apiURL = `https://api.unsplash.com/photos/random/?client_id=${accessKey}&count=${totalImagesToLoad}&query=${myKeyWords}`;
 
 let photosArray = [];
 let readyToRun = false;
@@ -16,8 +16,8 @@ let totalImages = 0;
 let isInitialLoad = true;
 
 // Helper Functions
-function updateURL(newCount) {
-  apiURL = `https://api.unsplash.com/photos/random/?client_id=${accessKey}&count=${newCount}&query=${myKeyWords}`;
+function updateTotalImagesToLoad(newTotal) {
+  apiURL = `https://api.unsplash.com/photos/random/?client_id=${accessKey}&count=${newTotal}&query=${myKeyWords}`;
 }
 
 function SetElementAttributes(element, attributes) {
@@ -32,6 +32,7 @@ function ImageLoaded() {
   if (currentImagesLoaded === totalImages) {
     readyToRun = true;
     loader.hidden = true;
+    isInitialLoad = false;
   }
 }
 
@@ -57,7 +58,7 @@ function DisplayPhotos() {
       title: photo.alt_description,
     });
 
-    // Check if image is loaded
+    // Event for
     myImg.addEventListener("load", ImageLoaded);
 
     // Append
@@ -68,15 +69,15 @@ function DisplayPhotos() {
 // Get Photos from Unsplash
 async function GetPhotos() {
   try {
+    if (!isInitialLoad) {
+      updateTotalImagesToLoad(5);
+    }
     const response = await fetch(apiURL);
     if (!response.ok) {
       throw new Error("Problems with network response...");
     }
     photosArray = await response.json();
     DisplayPhotos();
-    if (isInitialLoad) {
-      updateURL(20);
-    }
   } catch (error) {
     // Catch Error
     console.error("ERROR::: fetching data:", error);
