@@ -52,6 +52,10 @@ To use the Unsplash API, you need to obtain an API key:
 ```plaintext
 human-faces-loader/
 │
-├── index.html         # Main HTML file
-├── style.css          # Styling for the project
-└── script.js          # Main JavaScript file containing logic for API requests and DOM manipulation
+├── index.html            # Main HTML file
+├── css/
+│   └── style.css         # Styling for the project
+├── js/
+│   └── script.js         # Main JavaScript file containing logic for API requests and DOM manipulation
+└── assets/
+    └── loader.svg        # SVG file for the loading animation
