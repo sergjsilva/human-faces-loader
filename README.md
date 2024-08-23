@@ -2,7 +2,7 @@
 
 This project is a dynamic web page that loads human face images as users scroll down the page. The images are fetched from Unsplash through network requests triggered by the user's scrolling activity.
 
-<img src="./images/screen.png" />
+<img src="./assets/people-api.png" />
 
 ## Demo
 
